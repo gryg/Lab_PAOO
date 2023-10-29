@@ -44,3 +44,20 @@ char CaesarCipher::decryptChar(char c, int shift) const {
     }
     return c;
 }
+
+
+void CaesarCipher::encrypt() {
+    for (size_t i = 0; i < length; ++i) {
+        str[i] = encryptChar(str[i], shift);
+    }
+}
+
+void CaesarCipher::decrypt() {
+    for (size_t i = 0; i < length; ++i) {
+        str[i] = decryptChar(str[i], shift);
+    }
+}
+
+void CaesarCipher::display() const {
+    std::cout << str << std::endl;
+}
