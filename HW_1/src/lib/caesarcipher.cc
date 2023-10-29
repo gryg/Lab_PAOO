@@ -28,4 +28,19 @@ CaesarCipher::CaesarCipher(CaesarCipher&& other) noexcept {
     other.length = 0;
 }
 
-//todo decrypt & encrypt
+
+char CaesarCipher::encryptChar(char c, int shift) const {
+    if (isalpha(c)) {
+        char base = islower(c) ? 'a' : 'A';
+        return (c - base + shift) % 26 + base;
+    }
+    return c;
+}
+
+char CaesarCipher::decryptChar(char c, int shift) const {
+    if (isalpha(c)) {
+        char base = islower(c) ? 'a' : 'A';
+        return (c - base - shift + 26) % 26 + base; // +26 in order to handle negative shifts
+    }
+    return c;
+}
