@@ -9,9 +9,9 @@ add_subdirectory(lib)
 
 add_executable(CaesarCipher main.cpp)
 
-target_link_libraries(CaesarCipher PUBLIC lib)
+target_link_libraries(CaesarCipher PUBLIC caesarcipher)
 
 target_include_directories(CaesarCipher PUBLIC
                            "${PROJECT_BINARY_DIR}"
                             "${PROJECT_SOURCE_DIR}/lib"
-                           )
+                           )    

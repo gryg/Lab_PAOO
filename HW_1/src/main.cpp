@@ -5,7 +5,7 @@
 
 int main() {
     // Original object
-    CaesarCipher originalText("Encrypt me!", 7);
+    CaesarCipher originalText("Decoy text message longer than expected zzzzzzz!", 7);
     originalText.encrypt();
     std::cout << "Original: ";
     originalText.display();
@@ -31,8 +31,8 @@ int main() {
 
     // Attempting to use the moved-from object will give undefined behavior. 
     // Ideally, you shouldn't use the moved-from object further.
-    // std::cout << "Copied (after moving): ";
-    // copiedText.display();  // This might give undefined results or even crash. Avoid using moved-from objects.
+    std::cout << "-----------------\nCopied (after moving): ";
+    copiedText.display();  // This might give undefined results or even crash. Avoid using moved-from objects.
 
     return 0;
 }
