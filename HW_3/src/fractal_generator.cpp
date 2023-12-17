@@ -1,6 +1,12 @@
 #include "fractal_generator.h"
 #include <fstream>
 #include <complex>
+#include <iostream>
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+// #include "lib/stb/stb_image_write.h"
+#include "stb_image_write.h"
+
+
 
 FractalGenerator::FractalGenerator(int width, int height) : width(width), height(height) {
     buffer.resize(width * height * 3); // Inițializarea bufferului pentru imaginea RGB
@@ -30,11 +36,14 @@ void FractalGenerator::generate(int threadId, int totalThreads) {
 }
 
 void FractalGenerator::save(const std::string& filename) {
-    std::ofstream file(filename, std::ios::binary);
-    file << "P6\n" << width << " " << height << "\n255\n";
-    for (size_t i = 0; i < buffer.size(); i += 3) {
-        file << static_cast<unsigned char>(buffer[i])
-             << static_cast<unsigned char>(buffer[i + 1])
-             << static_cast<unsigned char>(buffer[i + 2]);
+    // Generate the correct filename with .png extension
+    std::string outputFilename = filename;
+    if (outputFilename.substr(outputFilename.length() - 4) != ".png") {
+        outputFilename += ".png";
     }
+
+    // buffer is assumed to be a std::vector<unsigned char> with the RGB pixel data
+    stbi_write_png(outputFilename.c_str(), width, height, 3, buffer.data(), 0);
 }
+
+
